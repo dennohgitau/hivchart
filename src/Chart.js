@@ -4,11 +4,17 @@ import React from 'react';
 import { Line } from 'react-chartjs-2';
 
 const Chart = ({ data, headers }) => {
+  const yearIndex = headers.indexOf('Year'); // Find the index of the 'Year' column
+
+  // Extract data for the x-axis labels and y-axis values
+  const labels = data.map(item => item[yearIndex]);
+  const values = data.map(item => item[headers.indexOf('Value')]);
+
   const chartData = {
-    labels: data.map(item => item[headers[6]]), // Assuming the Year column is for x-axis labels
+    labels: labels, // Use the 'Year' column for x-axis labels
     datasets: [{
       label: 'Value',
-      data: data.map(item => item[headers[9]]), // Assuming the 'Value' column is at index 9
+      data: values, // Use the 'Value' column for y-axis values
       backgroundColor: 'rgba(75,192,192,0.2)',
       borderColor: 'rgba(75,192,192,1)',
       borderWidth: 1,
@@ -18,10 +24,6 @@ const Chart = ({ data, headers }) => {
   const chartOptions = {
     scales: {
       x: {
-        type: 'time', // Correctly setting the type to 'time' for the x-axis
-        time: {
-          unit: 'year',
-        },
         title: {
           display: true,
           text: 'Year',
