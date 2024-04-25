@@ -17,22 +17,22 @@ const Chart = ({ data, headers }) => {
 
   const chartOptions = {
     scales: {
-      xAxes: [{
-        type: 'time',
+      x: {
+        type: 'time', // Correctly setting the type to 'time' for the x-axis
         time: {
           unit: 'year',
         },
-        scaleLabel: {
+        title: {
           display: true,
-          labelString: 'Year',
+          text: 'Year',
         },
-      }],
-      yAxes: [{
-        scaleLabel: {
+      },
+      y: {
+        title: {
           display: true,
-          labelString: 'Value',
+          text: 'Value',
         },
-      }],
+      },
     },
   };
 
