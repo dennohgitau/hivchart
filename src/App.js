@@ -71,10 +71,15 @@ export default function MenuAppBar() {
   const renderChart = (data, headers) => {
     const years = data.map(row => row[headers[0]]);
     const values = data.map(row => row[headers[3]]);
-    
-    
-
+  
     const ctx = document.getElementById('lineChart').getContext('2d');
+  
+    // Check if there's an existing chart instance on the canvas
+    const existingChart = Chart.getChart(ctx);
+    if (existingChart) {
+      existingChart.destroy(); // Destroy the previous chart instance
+    }
+  
     new Chart(ctx, {
       type: 'line',
       data: {
@@ -105,6 +110,7 @@ export default function MenuAppBar() {
       }
     });
   };
+  
 
   return (
     <Box sx={{ flexGrow: 1,  }}>
